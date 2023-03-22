@@ -1,0 +1,49 @@
+<p>Listado de Pokemon</p>
+
+<div class="events__container">
+  <app-search (pokemonsSearchEvent)="getFilterPokemons($event)"></app-search>
+  <button class="btn btn-primary" (click)="showPokemonForm('')">
+    <span class="material-icons material-symbols-outlined">
+      add
+    </span>
+    Nuevo
+  </button>
+</div>
+
+
+<div class="table__container">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" *ngFor="let specs of pokemonSpecs">{{ specs }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pokemon of pokemons">
+        <td data-label="name">{{ pokemon.name }}</td>
+        <td data-label="image" class="td-img">
+          <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="30">
+        </td>
+        <td data-label="attack">{{ pokemon.attack }}</td>
+        <td data-label="defense">{{ pokemon.defense }}</td>
+        <td data-label="actions">
+          <div class="btn-group">
+            <button (click)="showPokemonForm(pokemon)">
+              <span class="material-icons material-symbols-outlined">
+                border_color
+              </span>
+            </button>
+            <button (click)="removePokemon(pokemon)">
+              <span class="material-icons material-symbols-outlined">
+                delete_forever
+              </span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-card (isCreated)="isCreated($event)" (isHiddenPokemonForm)="cancel($event)" *ngIf="isPokemonFormHidden === false"
+  [data]="data"></app-card>

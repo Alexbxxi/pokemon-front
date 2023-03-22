@@ -1,0 +1,55 @@
+<div class="card__container">
+  <div class="card">
+    <div class="title">
+      <p>Nuevo Pokemon</p>
+    </div>
+
+    <form autocomplete="off" [formGroup]="pokemonForm">
+      <div class="form__container">
+        <div class="input__container">
+          <label>Nombre: </label>
+          <input type="text" formControlName="name"
+            [className]="this.pokemonForm.get('name')?.invalid && this.pokemonForm.get('name')?.touched ? 'is-invalid' : ''">
+        </div>
+        <div class="range">
+          <label>Ataque: </label>
+          <p>0</p>
+          <input type="range" #attack formControlName="attack" (input)="attack.value">
+          <p>{{ attack.value }}</p>
+        </div>
+      </div>
+      <div class="form__container">
+        <div class="input__container">
+          <label>Imagen: </label>
+          <input type="text" formControlName="image" placeholder="url"
+            [className]="this.pokemonForm.get('image')?.invalid && this.pokemonForm.get('image')?.touched ? 'is-invalid' : ''">
+        </div>
+        <div class="range">
+          <label>Defensa: </label>
+          <p>0</p>
+          <input type="range" #defense formControlName="defense" (input)="defense.value">
+          <p>{{ defense.value }}</p>
+        </div>
+      </div>
+      <div class="form__container">
+        <div class="input__container">
+          <label>Type: </label>
+          <input type="text" formControlName="type"
+            [className]="this.pokemonForm.get('type')?.invalid && this.pokemonForm.get('type')?.touched ? 'is-invalid' : ''">
+        </div>
+        <div class="range">
+          <label>HP: </label>
+          <p>0</p>
+          <input type="range" #hp formControlName="hp" (input)="hp.value">
+          <p>{{ hp.value }}</p>
+        </div>
+      </div>
+    </form>
+
+    <div class="button__container">
+      <button [className]="this.pokemonForm.invalid ? 'disabled' : 'btn btn-primary'"
+        [disabled]="this.pokemonForm.invalid" (click)="submit(pokemonForm)">Guardar</button>
+      <button class="btn btn-primary" (click)="hidePokemonForm()">Cancelar</button>
+    </div>
+  </div>
+</div>
