@@ -1,7 +1,7 @@
 <p>Listado de Pokemon</p>
 
 <div class="events__container">
-  <app-search (pokemonsSearchEvent)="getFilterPokemons($event)"></app-search>
+  <app-search (pokemonsSearchEvent)="getPokemonsByFilter($event)"></app-search>
   <button class="btn btn-primary" (click)="showPokemonForm('')">
     <span class="material-icons material-symbols-outlined">
       add

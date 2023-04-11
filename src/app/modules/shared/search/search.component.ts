@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, map, distinctUntilChanged, tap } from 'rxjs';
+import { Pokemon } from 'src/app/interfaces/pokemon.interface';
 import { PokemonsService } from 'src/app/services/pokemons.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { PokemonsService } from 'src/app/services/pokemons.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  @Output() pokemonsSearchEvent = new EventEmitter<string | undefined>();
+  @Output() pokemonsSearchEvent = new EventEmitter<any>();
 
   searchPokemon = new FormControl('');
 

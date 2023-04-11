@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Pokemon } from 'src/app/interfaces/pokemon.interface';
 import { PokemonsService } from 'src/app/services/pokemons.service';
 
 @Component({

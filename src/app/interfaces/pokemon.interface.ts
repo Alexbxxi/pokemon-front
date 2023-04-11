@@ -6,5 +6,5 @@ export interface Pokemon {
   defense: number;
   hp: number;
   type: string;
-  idAuthor?: 1;
+  idAuthor?: number;
 }

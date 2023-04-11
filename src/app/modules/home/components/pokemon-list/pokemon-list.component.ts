@@ -9,9 +9,8 @@ import { PokemonsService } from 'src/app/services/pokemons.service';
 })
 export class PokemonListComponent implements OnInit {
   public pokemons: Pokemon[] = [];
+  private pokemonsDummy: Pokemon[] = [];
   public data?: Pokemon;
-  private filterPokemonsByInput: boolean = false;
-  private pokemonId?: number;
   public isPokemonFormHidden: boolean = true;
 
   public pokemonSpecs = ['Nombre', 'Imagen', 'Ataque', 'Defensa', 'Acciones'];
@@ -22,17 +21,15 @@ export class PokemonListComponent implements OnInit {
     this.getPokemons();
   }
 
-  getFilterPokemons(pokemonName?: string) {
-    if (pokemonName === '') {
-      this.filterPokemonsByInput = false;
+  getPokemonsByFilter(pokemonName: string) {
+    this.pokemonsDummy = [];
+    if (!pokemonName) {
       this.getPokemons();
     } else {
-      this.filterPokemonsByInput = true;
-
       this.pokemons.filter((pokemon) => {
-        if (pokemon.name === pokemonName) {
-          this.pokemonId = pokemon.id;
-          this.getPokemons();
+        if (pokemon.name.includes(pokemonName)) {
+          this.pokemonsDummy.push(pokemon);
+          this.pokemons = this.pokemonsDummy;
         }
       });
     }
@@ -40,33 +37,12 @@ export class PokemonListComponent implements OnInit {
 
   getPokemons() {
     this.pokemons = [];
-    let service: any;
-
-    if (this.filterPokemonsByInput) {
-      if (!this.pokemonId) {
-        return;
-      }
-
-      service = this._pokemonService
-        .getPokemon(this.pokemonId as number)
-        .subscribe({
-          next: (res: any) => {
-            this.pokemons.push(res);
-          },
-          error: (err: Error) => console.error(err),
-        });
-
-      this.filterPokemonsByInput = false;
-    } else {
-      service = this._pokemonService.getPokemons();
-
-      service.subscribe({
-        next: (res: any) => {
-          this.pokemons.push(...res);
-        },
-        error: (err: Error) => console.error(err),
-      });
-    }
+    this._pokemonService.getPokemons().subscribe({
+      next: (res: any) => {
+        this.pokemons.push(...res);
+      },
+      error: (err: Error) => console.error(err),
+    });
   }
 
   isCreated(created: boolean) {

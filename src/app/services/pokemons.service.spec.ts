@@ -1,10 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-
 import { PokemonsService } from './pokemons.service';
 
 describe('PokemonsService', () => {
   let service: PokemonsService;
+  const pokemonDummy = {
+    name: 'Unknow',
+    image: '',
+    attack: 100,
+    defense: 100,
+    hp: 100,
+    type: 'Unknow',
+    idAuthor: 1,
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,11 +33,11 @@ describe('PokemonsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('service should return pokemon by id', (done: DoneFn) => {
-    service.getPokemon(355).subscribe((pokemon) => {
-      expect(pokemon);
+  it('service should return pokemon is created', (done: DoneFn) => {
+    service.createPokemon(pokemonDummy).subscribe((pokemonDummy) => {
+      expect(pokemonDummy);
       done();
-    });
+    })
     expect(service).toBeTruthy();
   });
 });
